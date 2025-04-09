@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Blog</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="navbar">
+    <a class="home" href="/">BlogIt</a>
+    <button type="submit" form="blog-form" id="publish-btn">Publish</button>
+  </div>
+  <form id="blog-form" action="/publish" method="post">
+    <div id="blog-content">
+      <h3 class="content title">Title</h3>
+      <input class="textbox" id="titleText" type="text" name="title">
+      <p class="content text">Tell your story....</p>
+      <textarea id="textarea" name="text-content"></textarea>
+    </div>
+  </form>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script>
+    const textarea = document.getElementById("textarea");
+    textarea.addEventListener("input", function(event){
+      this.style.height = "auto";
+      this.style.height = `${this.scrollHeight}px`;
+    });
+
+    checkFields();
+  
+    // Check fields whenever input or textarea changes
+    $("#titleText, #textarea").on("input", function() {
+      checkFields();
+    });
+    
+    function checkFields() {
+      if ($("#titleText").val() === "" || $("#textarea").val() === "") {
+        $("#publish-btn").prop("disabled", true);
+        $("#publish-div").prop("disabled", true);
+      } else {
+        $("#publish-btn").prop("disabled", false);
+        $("#publish-div").prop("disabled", false);
+      }
+    }
+
+    $("#publish-btn").click(function(){
+      validateForm();
+    })
+  </script>
+</body>
+</html>

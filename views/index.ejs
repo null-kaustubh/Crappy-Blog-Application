@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Application</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <%-include("partials/header.ejs")%>
+  <hr size="1" width="85%" color="#ccc">
+  <div class="container-flex">
+    <div class="content-container">
+      <h2>Recent Blog Posts</h2>
+      
+      <% if (locals.blogPosts && blogPosts.length > 0) { %>
+        <ul class="blog-list">
+          <% blogPosts.forEach(post => { %>
+            <li class="blog-item">
+              <a href="/blog/<%= post.id %>" class="blog-link">
+                <h3><%= post.title %></h3>
+                <% if (post.date) { %>
+                  <p class="date"><%= post.date.toLocaleDateString() %></p>
+                <% } %>
+              </a>
+            </li>
+          <% }); %>
+        </ul>
+      <% } else { %>
+        <p>No blog posts yet. Be the first to <a href="/start-a-blog" class="create">create one</a>!</p>
+      <% } %>
+    </div>
+  </div>
+</body>
+</html>
